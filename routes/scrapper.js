@@ -15,7 +15,7 @@ router.get("/scrap", async (req, res) => {
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: { width: 1280, height: 800 },
-    executablePath: await chromium.executablePath(),
+    executablePath: await chromium.executablePath("https://my-media-assets.s3.amazonaws.com/chromium-v126.0.0-pack.tar"),
     headless: "shell"
   });
 
