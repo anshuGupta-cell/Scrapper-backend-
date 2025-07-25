@@ -1,4 +1,6 @@
 const express = require('express')
+const puppeteer = require('puppeteer-core')
+const chromium = require('@sparticuz/chromium-min')
 
 const router= express.Router()
 
