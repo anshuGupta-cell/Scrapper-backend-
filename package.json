@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "postinstall": "wget https://github.com/Sparticuz/chromium/releases/download/v126.0.0/chromium-v126.0.0-pack.tar -O chromium.tar && mkdir -p chromium && tar -xf chromium.tar -C chromium && chmod +x chromium/chrome"
   },
   "keywords": [],
   "author": "anshu",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@sparticuz/chromium-min": "^126.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.1.0",
-    "express": "^5.1.0",
-    "puppeteer-core": "^22.13.1"
+    "express": "^5.1.0"
   }
 }
