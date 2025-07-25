@@ -1,30 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const puppeteer = require("puppeteer-core");
-const chromium = require("@sparticuz/chromium-min");
-
-chromium.setGraphicsMode = false;
-
-(async () => {
-  await chromium.font(
-    "https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf"
-  );
-})();
 
 router.get("/scrap", async (req, res) => {
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: { width: 1280, height: 800 },
-    executablePath: await chromium.executablePath("https://my-media-assets.s3.amazonaws.com/chromium-v126.0.0-pack.tar"),
-    headless: "shell"
-  });
+  try {
+    const browser = await puppeteer.launch({
+      executablePath: './chromium/chrome',
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu'
+      ],
+      defaultViewport: { width: 1280, height: 800 }
+    });
 
-  const page = await browser.newPage();
-  await page.goto("https://google.com");
-  const pageTitle = await page.title();
-  await browser.close();
+    const page = await browser.newPage();
+    await page.goto("https://google.com");
+    const pageTitle = await page.title();
+    await browser.close();
 
-  res.send(`Page title: ${pageTitle}`);
+    res.send(`Page title: ${pageTitle}`);
+  } catch (err) {
+    console.error("Error launching browser:", err);
+    res.status(500).send("Failed to launch Chromium");
+  }
 });
 
 module.exports = router;
