@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "postinstall": "wget https://github.com/Sparticuz/chromium/releases/download/v126.0.0/chromium-v126.0.0-pack.tar -O chromium.tar && mkdir -p chromium && tar -xf chromium.tar -C chromium && chmod +x chromium/chrome"
+    "postinstall": "wget https://github.com/Sparticuz/chromium/releases/download/v126.0.0/chromium-v126.0.0-pack.tar -O chromium.tar && mkdir -p chromium && tar -xf chromium.tar --strip-components=1 -C chromium && chmod +x chromium/chrome"
   },
   "keywords": [],
   "author": "anshu",
