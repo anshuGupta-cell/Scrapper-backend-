@@ -8,7 +8,7 @@ app.use(cors());
 const port = process.env.PORT || 5000
 
 app.use(express.json())
-
+console.log("second")
 app.use('/api/scrapper', require('./routes/scrapper'))
 
 app.listen(port, () => {
