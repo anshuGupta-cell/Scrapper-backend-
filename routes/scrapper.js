@@ -5,7 +5,7 @@ const router= express.Router()
 router.get("/scrap", async (req, res) => {
   
   
-  res.send("hmm")
+  res.send("hmm hsjsj")
 })
 
 module.exports = router
