@@ -1,13 +1,28 @@
-const express = require('express')
-const puppeteer = require('puppeteer-core')
-const chromium = require('@sparticuz/chromium-min')
+const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 
-const router= express.Router()
+// Optional: If you'd like to disable webgl, true is the default.
+chromium.setGraphicsMode = false;
+
+// Optional: Load any fonts you need.
+await chromium.font(
+    "https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf"
+);
 
 router.get("/scrap", async (req, res) => {
-  
-  
-  res.send("hmm hmm")
-})
+    const browser = await puppeteer.launch({
+        args: puppeteer.defaultArgs({ args: chromium.args, headless: "shell" }),
+        defaultViewport: viewport,
+        executablePath: await chromium.executablePath(),
+        headless: "shell"
+    });
 
-module.exports = router
+    const page = await browser.newPage();
+    await page.goto("https://example.com");
+    const pageTitle = await page.title();
+    await browser.close();
+
+    res.send("hmm hmm");
+});
+
+module.exports = router;
